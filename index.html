@@ -185,9 +185,16 @@ function App() {
 
   /* gönder */
   const handleSend = async () => {
-    if (!APPS_SCRIPT_URL) { flash("error", "Apps Script URL tanımlanmamış."); return; }
+    if (selected.length < 3) { flash("error", "En az 3 ders seçin."); return; }
+    // Kalanları sona ekle (orijinal sırada)
+    const full = [...selected, ...available];
+    setSelected(full);
+    setAvailable([]);
+    ls.save(name, full.map(it => it.name));
+
+    if (!APPS_SCRIPT_URL) { flash("info", "Sıralama tamamlandı — Apps Script URL tanımlanmamış."); return; }
     setSending(true);
-    const order = selected.map(it => it.name);
+    const order = full.map(it => it.name);
     const url   = `${APPS_SCRIPT_URL}?name=${encodeURIComponent(name)}&data=${encodeURIComponent(JSON.stringify(order))}`;
     try   { await fetch(url, { mode: "no-cors" }); }
     catch {}
@@ -205,7 +212,8 @@ function App() {
   };
 
   const pct    = selected.length / N;
-  const isDone = selected.length === N;
+  const isDone    = selected.length === N;
+  const canSend   = selected.length >= 3;
   const toastBg = { success:"#059669", error:"#dc2626", info:"#1e3a5f" };
 
   /* ── START ────────────────────────────────────────────────── */
@@ -271,7 +279,7 @@ function App() {
             <div style={{ width:120, height:6, background:"rgba(255,255,255,.15)",
                           borderRadius:99, overflow:"hidden" }}>
               <div style={{ height:"100%", width:`${pct*100}%`,
-                            background: isDone ? "#10b981" : "#60a5fa",
+                            background: isDone ? "#10b981" : canSend ? "#f59e0b" : "#60a5fa",
                             borderRadius:99, transition:"width .3s" }}/>
             </div>
             <span style={{ fontSize:12, fontFamily:"'DM Mono',monospace",
@@ -353,8 +361,8 @@ function App() {
               Sıralamanız
             </span>
             <span style={{ fontFamily:"'DM Mono',monospace", fontSize:12,
-                           color: isDone ? "#059669" : "#6b7280", fontWeight:600 }}>
-              {isDone ? "Tamamlandı ✓" : `${selected.length} / ${N}`}
+                           color: isDone ? "#059669" : canSend ? "#d97706" : "#6b7280", fontWeight:600 }}>
+              {isDone ? "Tamamlandı ✓" : canSend ? `${selected.length} seçildi — gönderilebilir` : `${selected.length} / ${N}`}
             </span>
           </div>
 
@@ -390,13 +398,15 @@ function App() {
 
           {/* Gönder butonu */}
           <div style={{ padding:"10px 10px", borderTop:"1px solid #e5e7eb", flexShrink:0 }}>
-            {isDone ? (
+            {canSend ? (
               <button className="send-btn ready" onClick={handleSend} disabled={sending}>
-                {sending ? "Gönderiliyor…" : "📤 Gönder"}
+                {sending ? "Gönderiliyor…"
+                  : isDone ? "📤 Gönder"
+                  : `📤 Gönder  (${N - selected.length} ders otomatik sıralanır)`}
               </button>
             ) : (
               <button className="send-btn" disabled>
-                {N - selected.length} ders daha seçin
+                En az 3 ders seçin ({selected.length}/3)
               </button>
             )}
           </div>
