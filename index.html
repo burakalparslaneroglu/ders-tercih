@@ -101,18 +101,36 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxVPxrjCEQWaMW4
 
 /* ── Ders listesi ────────────────────────────────────────────── */
 const COURSES = [
-  "MAKROEKONOMİNİN İLKELERİ","GENEL MATEMATİK","MİKROEKONOMİ II",
-  "MAKROEKONOMİ II","MATEMATİKSEL İKTİSAT II","UYGULAMALI İSTATİSTİK",
-  "SEÇMELİ DERS GRUBU 3-4 YY","KAMU EKONOMİSİ","EKONOMETRİ II",
-  "ULUSLARARASI İKTİSAT II","SEÇMELİ DERS GRUBU 5-6 YY 1",
-  "SEÇMELİ DERS GRUBU 5-6 YY 2","SEÇMELİ DERS GRUBU 5-6 YY 3",
-  "DÜNYA İKTİSAT TARİHİ","MALİYE EKONOMİSİ",
-  "SEÇMELİ DERS GRUBU 7-8 YY 1","SEÇMELİ DERS GRUBU 7-8 YY 2",
-  "SEÇMELİ DERS GRUBU 7-8 YY 3","SEÇMELİ DERS GRUBU 7-8 YY 4",
-  "EKONOMİNİN TEMELLERİ (ENDÜSTRİ MÜH.)","MAKRO İKTİSAT (İŞLETME)",
-  "İKTİSADA GİRİŞ II (SAĞLIK YÖNETİMİ)",
-  "EKONOMİNİN TEMELLERİ (SAĞLIK FAKÜLTESİ)","İKTİSAT II (HUKUK)",
-  "YÜKSEK LİSANS DERSİ 1","YÜKSEK LİSANS DERSİ 2","YÜKSEK LİSANS DERSİ 3",
+  // ── Lisans ──────────────────────────────────────────────────
+  "IKT101 MİKROEKONOMİNİN İLKELERİ",
+  "IKT103 GENEL MATEMATİK I",
+  "IKT201 MİKROEKONOMİ I",
+  "IKT203 MAKROEKONOMİ I",
+  "IKT205 MATEMATİKSEL İKTİSAT I",
+  "IKT207 İSTATİSTİK",
+  "AIS/3-4 SEÇMELİ DERS GRUBU 2. SINIF I",
+  "IKT301 PARA VE BANKA TEORİSİ",
+  "IKT303 ULUSLARARASI İKTİSAT I",
+  "IKT305 EKONOMETRİ I",
+  "AIS/5-6 SEÇMELİ DERS GRUBU 3. SINIF I",
+  "AIS/5-6 SEÇMELİ DERS GRUBU 3. SINIF II",
+  "AIS/5-6 SEÇMELİ DERS GRUBU 3. SINIF III",
+  "IKT401 TÜRKİYE EKONOMİSİ",
+  "IKT403 İKTİSADİ BÜYÜME VE KALKINMA",
+  "IKT405 İKTİSADİ DÜŞÜNCELER TARİHİ",
+  "AIS/7-8 SEÇMELİ DERS GRUBU 4. SINIF I",
+  "AIS/7-8 SEÇMELİ DERS GRUBU 4. SINIF II",
+  "AIS/7-8 SEÇMELİ DERS GRUBU 4. SINIF III",
+  // ── Servis ──────────────────────────────────────────────────
+  "IKT191 İKTİSADA GİRİŞ (İŞLETME SERVİS)",
+  "IKT193 INTRODUCTION TO ECONOMICS (YBS SERVİS)",
+  "IKT291 MİKRO İKTİSAT (İŞLETME SERVİS)",
+  "M2-IKT195 İKTİSAT I (HUKUK SERVİS)",
+  // ── Lisansüstü (YL + Doktora birlikte) ──────────────────────
+  "IKTT803 / IKT901 — MİKROEKONOMİ I (YL + Doktora)",
+  "IKTT805 / IKT903 — MAKROEKONOMİ I (YL + Doktora)",
+  "IKTT807 / IKT905 — EKONOMETRİK MODELLEME (YL + Doktora)",
+  "IKT DOKTORA SEÇMELİ",
 ];
 const ALL = COURSES.map((name, id) => ({ id, name }));
 const N   = ALL.length;
